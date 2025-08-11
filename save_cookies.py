@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import json
 
@@ -21,11 +23,12 @@ def save_cookies(email, password, cookies_file="bestsecret_cookies.json"):
             pass
 
         driver.find_element(By.ID, "login-button").click()
-        time.sleep(2)
-        driver.find_element(By.NAME, "username").send_keys(email)
+        wait = WebDriverWait(driver, 20)
+        username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
+        username_input.send_keys(email)
         driver.find_element(By.NAME, "password").send_keys(password)
         driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-        time.sleep(5)  # Ждем входа
+        time.sleep(5)
 
         cookies = driver.get_cookies()
         with open(cookies_file, "w") as f:
@@ -33,3 +36,4 @@ def save_cookies(email, password, cookies_file="bestsecret_cookies.json"):
         print("✅ Cookies сохранены!")
     finally:
         driver.quit()
+        return True

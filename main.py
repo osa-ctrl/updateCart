@@ -79,11 +79,21 @@ if __name__ == "__main__":
         print(f"▶️ Работаем с товаром: {product['PRODUCT_ID']}")
         success_add = add_to_cart(product)
         if not success_add:
-            print("⏩ Пробуем следующий товар...")
+            print("🔄 Ошибка удаления товара, перезагружаем куки...")
+            isSaveSuccess = save_cookies(EMAIL, PASSWORD, COOKIES_FILE)
+            if not isSaveSuccess:
+                print("🔴 Не удалось сохранить куки, перезапускаем цикл...")
+                time.sleep(5)
+                continue
             continue
         success_remove = remove_from_cart(product)
         if not success_remove:
-            print("⏩ Пробуем следующий товар...")
+            print("🔄 Ошибка удаления товара, перезагружаем куки...")
+            isSaveSuccess = save_cookies(EMAIL, PASSWORD, COOKIES_FILE)
+            if not isSaveSuccess:
+                print("🔴 Не удалось сохранить куки, перезапускаем цикл...")
+                time.sleep(5)
+                continue
             continue
         delay = random.randint(600, 1200)
         print(f"⏳ Жду {delay // 60} мин {delay % 60} сек до следующего цикла...")
