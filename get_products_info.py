@@ -6,7 +6,7 @@ def read_urls_from_file(filename):
     with open(filename, 'r') as f:
         return [line.strip() for line in f if line.strip()]
 
-def read_cookies(filename="cookies.json"):
+def read_cookies(filename="bestsecret_cookies.json"):
     with open(filename, "r") as f:
         cookies = json.load(f)
     return {cookie['name']: cookie['value'] for cookie in cookies}
@@ -34,7 +34,7 @@ def parse_product_info(url, cookies):
 
 def main():
     urls = read_urls_from_file("urls.txt")
-    cookies = read_cookies("cookies.json")
+    cookies = read_cookies("bestsecret_cookies.json")
     products = []
     for url in urls:
         info = parse_product_info(url, cookies)

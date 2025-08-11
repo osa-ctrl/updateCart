@@ -4,7 +4,7 @@ from selenium.webdriver.firefox.options import Options
 import time
 import json
 
-def save_cookies(email, password, cookies_file="cookies.json"):
+def save_cookies(email, password, cookies_file="bestsecret_cookies.json"):
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Firefox(options=options)

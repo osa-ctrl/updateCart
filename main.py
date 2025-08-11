@@ -9,7 +9,7 @@ EMAIL, PASSWORD = read_login_password("login.txt")
 
 PRODUCTS = read_products("products.txt")
 
-COOKIES_FILE = "cookies.json"
+COOKIES_FILE = "bestsecret_cookies.json"
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36",
@@ -32,7 +32,7 @@ def load_cookies():
         save_cookies(EMAIL, PASSWORD, COOKIES_FILE)
         return load_cookies()
     except json.JSONDecodeError:
-        print("🔴 Ошибка чтения файла cookies.json. Проверьте формат.")
+        print("🔴 Ошибка чтения файла bestsecret_cookies.json. Проверьте формат.")
         return None
 
 def add_to_cart(product):
